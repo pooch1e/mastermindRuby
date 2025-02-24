@@ -10,20 +10,21 @@
 
 
 #gen random number to guess
-code = rand(0..9999)
+answer = rand(0..9999)
 #split to array so easy to iterate over
-code_array = []
-code_array = code.to_s.split("")
+answer_array = []
+answer_array = answer.to_s.split("")
 
-print code_array
+print answer_array #answer for debug
 
 
+#ask for guess
 def ask_for_guess()
   puts "What is your guess?"
   guess = gets.chomp
   guess_arr = guess.to_s.split("")
   #ensure guess is only 4 digits
-  if guess_arr.length >= 4 || guess_arr.length <= 4 #this isnt working
+  while guess_arr.length != 4
     puts "guess again"
     guess = gets.chomp
     guess_arr = guess.to_s.split("")
@@ -31,4 +32,20 @@ def ask_for_guess()
   return guess_arr
 end
 
-print ask_for_guess()
+#compare guess to answer
+def compare_guess_to_answer(guesses_arr, answer_array) 
+  if guesses_arr == answer_array
+    puts "correct"
+    return true
+  else
+    puts "false"
+    return false
+  end
+end
+
+
+
+
+
+#make a guess
+
