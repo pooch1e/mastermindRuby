@@ -15,4 +15,20 @@ code = rand(0..9999)
 code_array = []
 code_array = code.to_s.split("")
 
-puts code_array
+print code_array
+
+
+def ask_for_guess()
+  puts "What is your guess?"
+  guess = gets.chomp
+  guess_arr = guess.to_s.split("")
+  #ensure guess is only 4 digits
+  if guess_arr.length >= 4 || guess_arr.length <= 4 #this isnt working
+    puts "guess again"
+    guess = gets.chomp
+    guess_arr = guess.to_s.split("")
+  end
+  return guess_arr
+end
+
+print ask_for_guess()
