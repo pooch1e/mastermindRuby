@@ -15,6 +15,7 @@ class Game
   def initialize()
     @game_won = false
     @answer = nil
+    @turn = 0
     gen_answer()
   end
 
@@ -32,14 +33,27 @@ class Game
 
 #compare guess to answer
 def compare_guess_to_answer(guess) 
+  puts @turn
   if guess == @answer_array
     puts "correct"
     @game_won = true
   else
     puts "false"
+    #iterate through guess + compare to answer
+    #plus count everytime number is different
+    count = 0
+    guess.each_with_index do |value, index|
+      if value == @answer_array[index]
+        count +=1
+      end
+    puts count
     @game_won = false
+    @turn += 1
+    end
   end
-end
+
+
+#end class
 end
 
 class Player
@@ -63,7 +77,7 @@ class Player
   return guess_arr
   end
   
-  
+#end class  
 end
 
 myGame = Game.new
@@ -75,7 +89,7 @@ while !myGame.instance_variable_get(:@game_won)
   guess = myPlayer.ask_for_guess
   myGame.compare_guess_to_answer(guess)
 end
-
+end
 
 
 
