@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Mastermind
 
 # make a 4-digit random number between 0000 and 9999
@@ -15,7 +17,7 @@ class Game
     @game_won = false
     @answer = nil
     @turn = 0
-    @game_end = 12 #final guess
+    @game_end = 12 # final guess
     gen_answer
   end
 
@@ -38,19 +40,21 @@ class Game
       @game_won = true
       guess
     else
-      puts 'false'
-      # iterate through guess + compare to answer
-      # plus count everytime number is different
-      count = 0
-      guess.each_with_index do |value, index|
-        count += 1 if value == @answer_array[index]
-        puts count
-        @game_won = false
-        @turn += 1
-        if @turn == @game_end # if it is the 12th turn, end the game
-          @game_won = true
-        end
-      end
+      answer_wrong(guess)
+    end
+  end
+
+  def answer_wrong(guess)
+    puts 'false'
+    # iterate through guess + compare to answer
+    # plus count everytime number is different
+    count = 0
+    guess.each_with_index do |value, index|
+      count += 1 if value == @answer_array[index]
+      puts count
+      @game_won = false
+      @turn += 1
+      @game_won = true if @turn == @game_end # if it is the 12th turn, end the game
     end
   end
 
@@ -74,6 +78,7 @@ class Game
       end
       guess_arr
     end
+  
 
     # end class
   end
