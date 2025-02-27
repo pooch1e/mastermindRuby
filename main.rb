@@ -15,6 +15,7 @@ class Game
     @game_won = false
     @answer = nil
     @turn = 0
+    @game_end = 12 #final guess
     gen_answer
   end
 
@@ -46,6 +47,9 @@ class Game
         puts count
         @game_won = false
         @turn += 1
+        if @turn == @game_end # if it is the 12th turn, end the game
+          @game_won = true
+        end
       end
     end
   end
