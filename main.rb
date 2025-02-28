@@ -48,14 +48,30 @@ class Game
     puts 'false'
     # iterate through guess + compare to answer
     # plus count everytime number is different
-    count = 0
-    guess.each_with_index do |value, index|
-      count += 1 if value == @answer_array[index]
-      puts count
-      @game_won = false
-      @turn += 1
-      @game_won = true if @turn == @game_end # if it is the 12th turn, end the game
+
+    wrong_count = guess.tally do |item, count|
+      puts "You have #{count} of this #{item}"
     end
+
+
+    correct_place = 0
+    correct_digit_wrong_place = 0
+
+    guess.each_with_index do |digit, index|
+      if digit == @answer_array[index]
+      correct_place += 1
+      elsif @answer_array.include?(digit)
+      correct_digit_wrong_place += 1
+      end
+    end
+
+    puts "⚪️" # correct digits
+    puts "⚫️" # wrong digits
+    @game_won = false
+    @turn += 1
+    puts "Turn #{@turn}"
+    @game_won = true if @turn == @game_end # if it is the 12th turn, end the game
+    puts "Bad luck, try again"
   end
 
   class Player
