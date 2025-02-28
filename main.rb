@@ -34,7 +34,7 @@ class Game
 
   # compare guess to answer
   def compare_guess_to_answer(guess)
-    puts @turn
+    # puts "The turn is currently #{@turn}" removed as it was for debug
     if guess == @answer_array
       puts 'correct'
       @game_won = true
@@ -45,7 +45,7 @@ class Game
   end
 
   def answer_wrong(guess)
-    puts 'false'
+    # puts 'false' removed for debug
     # iterate through guess + compare to answer
     # plus count everytime number is different
     correct_place = 0
