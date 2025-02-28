@@ -29,7 +29,7 @@ class Game
     # split to array so easy to iterate over
     @answer_array = @answer.split('')
 
-    print @answer_array # answer for debug
+    # print @answer_array # answer for debug
   end
 
   # compare guess to answer
@@ -72,7 +72,8 @@ class Game
     correct_digit_wrong_place -= correct_place
 
     correct_digit_wrong_place.times {feedback << "⚫️"}
-    puts feedback.join(" ")
+    give_guess = feedback.join("")
+    puts give_guess
     @game_won = false
     @turn += 1
     puts "Turn #{@turn}"
