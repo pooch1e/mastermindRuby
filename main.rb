@@ -48,25 +48,31 @@ class Game
     puts 'false'
     # iterate through guess + compare to answer
     # plus count everytime number is different
-
-    wrong_count = guess.tally do |item, count|
-      puts "You have #{count} of this #{item}"
-    end
-
-
     correct_place = 0
     correct_digit_wrong_place = 0
+    feedback = []
 
-    guess.each_with_index do |digit, index|
+    guess.each_with_index do |digit, index| # check for correct numbers
       if digit == @answer_array[index]
       correct_place += 1
-      elsif @answer_array.include?(digit)
-      correct_digit_wrong_place += 1
+      feedback << "⚪️"
+      end
+    end
+    # Count partial matches (correct number, wrong position)
+    unmatched_correct = @answer_array.tally #correct number
+    unmatched_user = guess.tally
+
+    unmatched_correct.each do |num, count|
+      if unmatched_user[num]
+        correct_digit_wrong_place += [count, unmatched_user[num]].min
       end
     end
 
-    puts "⚪️" # correct digits
-    puts "⚫️" # wrong digits
+    # remove exact matches from partial
+    correct_digit_wrong_place -= correct_place
+
+    correct_digit_wrong_place.times {feedback << "⚫️"}
+    puts feedback.join(" ")
     @game_won = false
     @turn += 1
     puts "Turn #{@turn}"
