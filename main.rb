@@ -72,7 +72,7 @@ class Game
     correct_digit_wrong_place -= correct_place
 
     correct_digit_wrong_place.times {feedback << "⚫️"}
-    feedback.append("🔴") if feedback.length > 4
+    feedback.append("🔴") if feedback.length < 4
     give_guess = feedback.join("")
     puts give_guess
     @game_won = false
